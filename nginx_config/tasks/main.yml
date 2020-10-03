@@ -1,0 +1,30 @@
+---
+ - name: adding loadbalancer configuration
+   template:
+     src: loadbalancer.j2
+     dest: /etc/nginx/conf.d/loadbalancer.conf
+
+ - name: deleting default from sites-enabled (Debian)
+   file: 
+     path: /etc/nginx/sites-enabled/default
+     state: absent
+ 
+ - name: changing rights for nginx dir
+   file:
+     path: /etc/nginx
+     recurse: yes
+     owner: vagrant
+     mode: '0755'
+
+ - name: changing rights for logs
+   file:
+     path: /var/log/nginx/error.log
+     owner: vagrant
+     mode: '0766'
+
+ - name: check nginx config
+   shell: nginx -t
+   register: nginx_configuration_status
+   notify:
+     - restart nginx    
+     
