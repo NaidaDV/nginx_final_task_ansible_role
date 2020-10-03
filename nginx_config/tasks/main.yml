@@ -13,13 +13,13 @@
    file:
      path: /etc/nginx
      recurse: yes
-     owner: vagrant
+     owner: ubuntu
      mode: '0755'
 
  - name: changing rights for logs
    file:
      path: /var/log/nginx/error.log
-     owner: vagrant
+     owner: ubuntu
      mode: '0766'
 
  - name: check nginx config
